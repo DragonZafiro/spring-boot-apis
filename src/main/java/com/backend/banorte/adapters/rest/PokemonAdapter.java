@@ -19,7 +19,7 @@ public class PokemonAdapter {
 
     public Pokemon obtenerPokemon (String nombrePokemon){
 
-        String url = pokeApiUrl.PokemonUrl(nombrePokemon);
+        String url = pokeApiUrl+ "/api/v2/pokemon/"+nombrePokemon;
         ResponseEntity<Pokemon> responseEntity = restTemplate.getForEntity(url, Pokemon.class);
         Pokemon pokemon = responseEntity.getBody();
         return pokemon;

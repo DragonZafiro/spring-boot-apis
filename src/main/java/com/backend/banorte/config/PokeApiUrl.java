@@ -14,8 +14,8 @@ public class PokeApiUrl {
     @Value("${poke-api.host}")
     protected String baseUrl;
 
-    public String PokemonUrl(String nombrePokemon){
-        return baseUrl + "/api/v2/pokemon/" + nombrePokemon;
+    public String PokemonUrl(){
+        return baseUrl;
     }
 
 }
