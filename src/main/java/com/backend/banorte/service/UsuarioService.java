@@ -28,6 +28,19 @@ public class UsuarioService {
     @Autowired
     Util util;
 
+    public ResponseEntity<Object> obtenerUsuario(@RequestBody UsuarioRequest request) {
+
+        System.out.println("CONSULTAR A LA BASE DE DATOS CON EL USUARIO: " + request.getUsername());
+        UsuarioDto entity = usuarioAdapter.getUserData(request.getUsername());
+
+        if (entity == null) {
+            throw new CustomMessageException("EL USUARIO NO EXISTE");
+        }
+
+        System.out.println("DATOS DE RESPUESTA: " + entity);
+        return ResponseEntity.ok().body(entity);
+    }
+
     public ResponseEntity<Object> generarReporte(UsuarioRequest request) {
         UsuarioDto entity = usuarioAdapter.getUserData(request.getUsername());
         if (entity == null) {
@@ -37,6 +50,7 @@ public class UsuarioService {
         ReporteAccountResponse response = new ReporteAccountResponse();
         response.setUsername(entity.getUsuario().toLowerCase());
         response.setEmailDomain(entity.getEmail().split("@")[1]);
+
         String ultimos = util.obtenerUltimos4Digitos(entity.getAccountNumber());
         response.setLastDigitsAccount(ultimos);
 
@@ -69,18 +83,5 @@ public class UsuarioService {
         }
         System.out.println("SE ACTUALIZARON UN TOTAL DE " + filasActualizadas + " REGISTROS");
         return ResponseEntity.ok().build();
-    }
-
-    public ResponseEntity<Object> obtenerUsuario(@RequestBody UsuarioRequest request) {
-
-        System.out.println("CONSULTAR A LA BASE DE DATOS CON EL USUARIO: " + request.getUsername());
-        UsuarioDto entity = usuarioAdapter.getUserData(request.getUsername());
-
-        if (entity == null) {
-          throw new CustomMessageException("EL USUARIO NO EXISTE");
-        }
-
-        System.out.println("DATOS DE RESPUESTA: " + entity);
-        return ResponseEntity.ok().body(entity);
     }
 }
