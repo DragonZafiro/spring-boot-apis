@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 @Component
 public class Util {
     public String obtenerUltimos4Digitos(String numeroCuenta) {
@@ -16,21 +17,18 @@ public class Util {
         String ultimosDigitos = numeroCuenta.substring(primerIndice, ultimoIndice);
         return ultimosDigitos;
     }
+
+
     public String convertirDateFechaString(String fecha){
         SimpleDateFormat formatoEntrada = new SimpleDateFormat("MM/yy");
         SimpleDateFormat formatoSalida = new SimpleDateFormat("MMMM yyyy");
-        Date fechadate = null;
 
-
-
+        Date fechadate;
         try {
             fechadate = formatoEntrada.parse(fecha);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
-
-
 
         String fechaFormateada = formatoSalida.format(fechadate).toUpperCase();
         return fechaFormateada;
@@ -41,6 +39,14 @@ public class Util {
         String restoPalabra = palabra.substring(1).toLowerCase();
         String primeraMinuscula = primeraLetra +restoPalabra;
         return primeraMinuscula;
+
+    }
+
+    public String enmascararNumeroTarjeta(String tarjeta){
+
+        String ultimosDigitos = tarjeta.substring(12, 16);
+        String nuevoNumTarj = "**** **** **** " + ultimosDigitos;
+        return nuevoNumTarj;
 
     }
 

@@ -34,7 +34,7 @@ public class TarjetaAdapter {
         System.out.println("TarjetaEntity list: " + entityList);
 
         if (entityList == null){
-            return List.of();
+            return null;
         }
         List<CardDto> cardDtosList = new ArrayList<>();
             for (TarjetaEntity tarjetaEntity : entityList) {
@@ -70,6 +70,7 @@ public class TarjetaAdapter {
     }
 
     public void deleteCard (String accountNum){
+
         repository.borrarTarjeta(accountNum);
     }
 
