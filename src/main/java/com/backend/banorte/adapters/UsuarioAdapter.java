@@ -6,6 +6,7 @@ import com.backend.banorte.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UsuarioAdapter {
 
@@ -46,6 +47,23 @@ public class UsuarioAdapter {
 
     }
 
+    public UsuarioDto getEmail(String email) {
+        UsuarioEntity entity = repository.obtenerEmail(email);
+        if (entity == null) {
+            return null;
+        }
+
+        UsuarioDto usuarioDto = new UsuarioDto();
+        usuarioDto.setUsuario(entity.getUsuario());
+        usuarioDto.setOtp(entity.getOtp());
+        usuarioDto.setPassword(entity.getPassword());
+        usuarioDto.setEmail(entity.getEmail());
+        usuarioDto.setAccountNumber(entity.getAccountNumber());
+        return usuarioDto;
+
+
+    }
+
 
     public int updateUserOtp(String username, String otp) {
         return repository.actualizarOtp(username, otp);
@@ -62,4 +80,8 @@ public class UsuarioAdapter {
     public void addUser(String username, String password, String otp) {
         repository.agregarUsuario(username, password, otp);
     }
+
+
+
+
 }

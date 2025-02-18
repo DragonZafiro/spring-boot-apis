@@ -54,9 +54,15 @@ public class UsuarioServiceTest {
 
         when(adapter.getUserData("paquito")).thenReturn(usuarioDto);
 
-        ResponseEntity<Object> response = service.obtenerUsuario(request);
+        ResponseEntity<UsuarioDto> response = service.obtenerUsuario(request);
+        UsuarioDto responseUsuarioDto = response.getBody();
 
-        Assertions.assertEquals(200, response.getStatusCode().value() );
+        Assertions.assertEquals("paquito", responseUsuarioDto.getUsuario());
+        Assertions.assertEquals("213213", responseUsuarioDto.getPassword());
+        Assertions.assertEquals("123", responseUsuarioDto.getOtp());
+        Assertions.assertEquals("jeje@gmail.com", responseUsuarioDto.getEmail());
+        Assertions.assertEquals("100000000001", responseUsuarioDto.getAccountNumber());
+
 
     }
     @Test
@@ -81,15 +87,16 @@ public class UsuarioServiceTest {
         usuarioDto.setUsuario("USUARIO");
         usuarioDto.setEmail("123123123@123123");
         usuarioDto.setAccountNumber("50505050501010");
+
         when(adapter.getUserData("usuario")).thenReturn(usuarioDto);
 
         when(util.obtenerUltimos4Digitos("50505050501010")).thenReturn("1010");
 
-        ResponseEntity<Object> response = service.generarReporte(request);
+        ResponseEntity<ReporteAccountResponse> response = service.generarReporte(request);
 
 //         200, response.getStatusCode().value()
 
-        ReporteAccountResponse accountResponse = (ReporteAccountResponse) response.getBody();
+        ReporteAccountResponse accountResponse = response.getBody();
 
 
         Assertions.assertEquals("usuario", accountResponse.getUsername());

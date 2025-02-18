@@ -32,7 +32,7 @@ public class PokemonService {
     @Autowired
     PokemonEntrenadorAdapter pokemonEntrenadorAdapter;
 
-    public ResponseEntity<Object> capturarPokemon (@RequestBody CapturarPokemonRequest request){
+    public ResponseEntity<PokemonResponse> capturarPokemon (@RequestBody CapturarPokemonRequest request){
         EntrenadorDto entrenadorDto = entrenadorAdapter.obtenerEntrenador(request.getNombreEntrenador());
 
         if (entrenadorDto == null) {

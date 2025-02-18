@@ -4,6 +4,7 @@ import com.backend.banorte.adapters.rest.PokemonAdapter;
 import com.backend.banorte.domain.dto.pokemon.Pokemon;
 import com.backend.banorte.domain.request.CapturarPokemonRequest;
 import com.backend.banorte.domain.request.NombreEntrenadorRequest;
+import com.backend.banorte.domain.response.PokemonResponse;
 import com.backend.banorte.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class PokemonController {
     }
 
     @PostMapping("/pokemon/capturar")
-    public ResponseEntity<Object> capturarPokemon (@RequestBody CapturarPokemonRequest request){
+    public ResponseEntity<PokemonResponse> capturarPokemon (@RequestBody CapturarPokemonRequest request){
         return pokemonService.capturarPokemon(request);
     }
 
