@@ -16,7 +16,6 @@ public class PokemonAdapter {
     @Value("${poke-api.host}")
     String pokeApiHost;
 
-
     public Pokemon obtenerPokemon (String nombrePokemon){
 
         String url = pokeApiHost + "/api/v2/pokemon/"+nombrePokemon;
